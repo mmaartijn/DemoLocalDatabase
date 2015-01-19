@@ -8,13 +8,14 @@ $(document).ready(function(){
 
 function onDeviceReady(){
     $('.deviceNotReady').removeClass('deviceNotReady').addClass('deviceReady');
-    db = window.openDatabase("MyDatabaseName", "1.0", "My database display name", 200000 /* Size */);
+    
+    // Open the database.
+    db = window.sqlitePlugin.openDatabase({name: "DB"});
     db.transaction(createPersonsTable, errorCB);
 }
 
 // All in one transaction
 function createPersonsTable(trans) {
-    //trans.executeSql('DROP TABLE IF EXISTS Person');
     trans.executeSql('CREATE TABLE IF NOT EXISTS Person (name, age)');
     getAllPersons(trans);
 }
