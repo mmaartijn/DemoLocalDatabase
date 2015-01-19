@@ -10,7 +10,7 @@ function onDeviceReady(){
     $('.deviceNotReady').removeClass('deviceNotReady').addClass('deviceReady');
     
     // Open the database.
-    db = window.sqlitePlugin.openDatabase({name: "DB"});
+    db = window.openDatabase("dbName", "1.0", "DB Displayname", 1000000);
     db.transaction(createPersonsTable, errorCB, successCB);
 }
 
