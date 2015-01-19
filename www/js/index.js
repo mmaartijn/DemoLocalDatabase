@@ -11,7 +11,7 @@ function onDeviceReady(){
     
     // Open the database.
     db = window.openDatabase("dbName", "1.0", "DB Displayname", 1000000);
-    db.transaction(createPersonsTable, errorCB, successCB);
+    db.transaction(createPersonsTable, errorCB);
 }
 
 // All in one transaction
@@ -21,7 +21,7 @@ function createPersonsTable(trans) {
 }
 
 function getAllPersons(trans) {
-    trans.executeSql('SELECT * FROM Person', [], getAllPersonsCB, errorCB, successCB);
+    trans.executeSql('SELECT * FROM Person', [], getAllPersonsCB, errorCB);
 }
 
 function getAllPersonsCB(trans, results){
@@ -46,7 +46,7 @@ function btnSubmitClicked(){
     if(db){
         db.transaction(function(trans){ 
             addPerson(trans, name, age);
-        }, errorCB, successCB);
+        }, errorCB);
 
         $('#txtName').val('');
         $('#txtAge').val('');
@@ -55,11 +55,10 @@ function btnSubmitClicked(){
 
 function btnClearClicked(){
     if(db){
-        alert('start');
         db.transaction(function(trans){ 
             trans.executeSql('DELETE FROM Person');
             getAllPersons(trans);
-        }, errorCB, successCB);
+        }, errorCB);
     }
 }
 
@@ -74,8 +73,4 @@ function errorCB(err) {
     alert("Error processing SQL: " + err.message);
 
     return true;
-}
-
-function successCB(){
-    alert('success');
 }
