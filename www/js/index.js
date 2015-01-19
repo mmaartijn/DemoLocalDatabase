@@ -30,9 +30,7 @@ function getAllPersonsCB(trans, results){
         htmlRows += '<tr><td>' + results.rows.item(i).name+ '</td><td>' + results.rows.item(i).age + '</td></tr>';
     }
 
-    if(htmlRows.length){
-        $('#results tbody').html(htmlRows);
-    }
+    $('#results tbody').html(htmlRows);
 }
 
 function bindButtons(){
@@ -57,7 +55,7 @@ function btnSubmitClicked(){
 function btnClearClicked(){
     if(db){
         db.transaction(function(trans){ 
-            trans.executeSql('DELETE FROM Person', [], function(){}, errorCB);
+            trans.executeSql('DELETE FROM Person');
             getAllPersons(trans);
         }, errorCB);
     }
