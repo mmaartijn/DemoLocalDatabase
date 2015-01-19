@@ -7,7 +7,7 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         Martijn Schuurmans
     </author>
-    <content src="index.html" />
+    <content src="/www/index.html" />
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.6.3" />
     <preference name="orientation" value="default" />
@@ -24,4 +24,6 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+
+    <plugin name="SQLitePlugin" value="SQLitePlugin" />
 </widget>
