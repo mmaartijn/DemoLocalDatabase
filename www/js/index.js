@@ -4,7 +4,6 @@ $(document).ready(function(){
     document.addEventListener('deviceready', onDeviceReady, false);
 
     bindButtons();
-    onDeviceReady();
 });
 
 function onDeviceReady(){
