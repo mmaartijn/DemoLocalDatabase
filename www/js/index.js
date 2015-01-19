@@ -1,5 +1,3 @@
-var db;
-
 $(document).ready(function(){
     document.addEventListener('deviceready', onDeviceReady, false);
 
@@ -18,24 +16,25 @@ function btnSubmitClicked(){
 }
 
 function btnClearClicked(){
-    db.transaction(function(trans){ 
+    getDB().transaction(function(trans){ 
         trans.executeSql('DELETE FROM Person');
         getAllPersons(trans);
     }, errorCB);
 }
 
+function getDB(){
+    // Open the database.
+    return window.openDatabase("Database", "1.0", "Demo", -1);
+}
+
 function onDeviceReady(){
     $('.deviceNotReady').removeClass('deviceNotReady').addClass('deviceReady');
-    
-    // Open the database.
-    db = window.openDatabase("Database", "1.0", "Demo", -1);
-
     initializeDatabase();
 }
 
 // All in one transaction
 function initializeDatabase() {
-    db.transaction(function(trans){ 
+    getDB().transaction(function(trans){ 
         trans.executeSql('CREATE TABLE IF NOT EXISTS Person (name, age)');
         getAllPersons(trans);
     }, errorCB);
@@ -54,7 +53,7 @@ function getAllPersons(trans) {
 }
 
 function addPerson(name, age){
-    db.transaction(function(trans){ 
+    getDB().transaction(function(trans){ 
         trans.executeSql('INSERT INTO Person (name, age) VALUES (?,?)', [ name, age ]);
         getAllPersons(trans);
     }, errorCB);
