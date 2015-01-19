@@ -48,6 +48,9 @@ function btnSubmitClicked(){
         db.transaction(function(trans){ 
             addPerson(trans, name, age);
         }, errorCB);
+
+        $('#txtName').val('');
+        $('#txtAge').val('');
     }
 }
 
@@ -55,6 +58,7 @@ function btnClearClicked(){
     if(db){
         db.transaction(function(trans){ 
             trans.executeSql('DELETE FROM Person', [], undefined, errorCB);
+            getAllPersons(trans);
         }, errorCB);
     }
 }
