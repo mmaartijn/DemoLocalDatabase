@@ -28,10 +28,9 @@ function onDeviceReady(){
     $('.deviceNotReady').removeClass('deviceNotReady').addClass('deviceReady');
     
     // Open the database.
-    db = window.sqlitePlugin.openDatabase("Database", "1.0", "Demo", -1);
+    db = window.openDatabase("Database", "1.0", "Demo", -1);
 
     initializeDatabase();
-    
 }
 
 // All in one transaction
