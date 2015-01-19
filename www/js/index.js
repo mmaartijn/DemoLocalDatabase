@@ -11,7 +11,7 @@ function onDeviceReady(){
     
     // Open the database.
     db = window.sqlitePlugin.openDatabase({name: "DB"});
-    db.transaction(createPersonsTable, errorCB);
+    db.transaction(createPersonsTable, errorCB, successCB);
 }
 
 // All in one transaction
@@ -21,7 +21,7 @@ function createPersonsTable(trans) {
 }
 
 function getAllPersons(trans) {
-    trans.executeSql('SELECT * FROM Person', [], getAllPersonsCB, errorCB);
+    trans.executeSql('SELECT * FROM Person', [], getAllPersonsCB, errorCB, successCB);
 }
 
 function getAllPersonsCB(trans, results){
@@ -46,7 +46,7 @@ function btnSubmitClicked(){
     if(db){
         db.transaction(function(trans){ 
             addPerson(trans, name, age);
-        }, errorCB);
+        }, errorCB, successCB);
 
         $('#txtName').val('');
         $('#txtAge').val('');
@@ -55,10 +55,11 @@ function btnSubmitClicked(){
 
 function btnClearClicked(){
     if(db){
+        alert('start');
         db.transaction(function(trans){ 
             trans.executeSql('DELETE FROM Person');
             getAllPersons(trans);
-        }, errorCB);
+        }, errorCB, successCB);
     }
 }
 
@@ -73,4 +74,8 @@ function errorCB(err) {
     alert("Error processing SQL: " + err.message);
 
     return true;
+}
+
+function successCB(){
+    alert('success');
 }

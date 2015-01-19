@@ -25,5 +25,5 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
 
-    <gap:plugin name="com.millerjames01.sqlite-plugin" version="1.0.1" />
+    <gap:plugin name="ch.zhaw.sqlite" version="2.0.0" />
 </widget>
