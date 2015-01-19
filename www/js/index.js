@@ -57,7 +57,7 @@ function btnSubmitClicked(){
 function btnClearClicked(){
     if(db){
         db.transaction(function(trans){ 
-            trans.executeSql('DELETE FROM Person', [], undefined, errorCB);
+            trans.executeSql('DELETE FROM Person', [], function(){}, errorCB);
             getAllPersons(trans);
         }, errorCB);
     }
